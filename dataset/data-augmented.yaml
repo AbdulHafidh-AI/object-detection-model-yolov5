@@ -1,0 +1,17 @@
+# train: ../train/images
+# val: ../valid/images
+# test: ../test/images
+
+train: ../dataset/augmented-data/train/
+val: ../dataset/augmented-data/valid/
+test: ../dataset/augmented-data/test/
+
+nc: 15
+names: ['can_ademSari_herbalLemon_250mL', 'can_ademSari_herbalTea_250mL', 'can_larutanCapKakiTiga_markisa_320mL', 'plasticBottle_ainiqua_mineralWater_600mL', 'plasticBottle_pocariSweat_isotonicDrink_900mL', 'plasticBottle_rych_mineralWater_500mL', 'tetraPack_oatside_baristaBlend_200mL', 'tetraPack_oatside_caramelMacchiato_200mL', 'tetraPack_oatside_chocolateMelt_200mL', 'tetraPack_oatside_chocolate_200mL', 'tetraPack_oatside_coffee_250mL', 'tetraPack_oatside_mocha_200mL', 'tetraPack_tropicanaSlim_almondDrink_190mL', 'tetraPack_ultraMilk_fullCream_250mL', 'tetraPack_ultraMilk_stroberi_250mL']
+
+roboflow:
+  workspace: image-acquistion
+  project: recyling
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/image-acquistion/recyling/dataset/2
