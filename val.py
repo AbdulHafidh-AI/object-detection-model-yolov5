@@ -24,6 +24,7 @@ import json
 import os
 import subprocess
 import sys
+import csv
 from pathlib import Path
 
 import numpy as np
@@ -405,6 +406,18 @@ def run(
         ap50, ap = ap[:, 0], ap.mean(1)  # AP@0.5, AP@0.5:0.95
         mp, mr, map50, map = p.mean(), r.mean(), ap50.mean(), ap.mean()
     nt = np.bincount(stats[3].astype(int), minlength=nc)  # number of targets per class
+
+    # Save metrics to CSV file
+    csv_file = save_dir / "metrics.csv"
+    with open(csv_file, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Class", "Images", "Instances", "Precision", "Recall", "mAP50", "mAP50-95"])
+        writer.writerow(["all", seen, nt.sum(), mp, mr, map50, map])
+        if nc > 1 and len(stats):
+            for i, c in enumerate(ap_class):
+                writer.writerow([names[c], seen, nt[c], p[i], r[i], ap50[i], ap[i]])
+
+    LOGGER.info(f"Metrics saved to {csv_file}")
 
     # Print results
     pf = "%22s" + "%11i" * 2 + "%11.3g" * 4  # print format
